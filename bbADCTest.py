@@ -16,7 +16,7 @@ if __name__ == "__main__":
 		#value = ADC.read("P9_40")
 		voltage = value * 1.8 #* 1.8 #1.8V
 		#print voltage
-		print value
+		print voltage
 		time.sleep(.1)
 		
 
