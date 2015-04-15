@@ -12,7 +12,7 @@ if __name__ == "__main__":
  	ADC.setup()
  	while True:
 		
-		value = ADC.read("P9_40") #USing pin40
+		value = ADC.read("P9_39") #USing pin40
 		#value = ADC.read("P9_40")
 		voltage = value * 1.8 #* 1.8 #1.8V
 		#print voltage
