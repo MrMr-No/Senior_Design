@@ -31,7 +31,7 @@ wss.on('connection', function(ws) {
         // set run to 1.
         else if (message == 'MakeConnection') {
             //pwm.turnOn();
-            ws.send('Node connected ');
+            ws.send('Connection Made');
             console.log("Connection worked");
             console.log("trying anlog");
             // analogRead.AnalogValue();
@@ -40,13 +40,15 @@ wss.on('connection', function(ws) {
                 console.log('x.value = ' + x.value* 1.8);
                 console.log('x.err = ' + x.err);
                 ws.send("Analog Voltage: "+String(1.8 * x.value));
+
                 console.log('Hi');
             });
         }
         else if (message.indexOf('ReadAnalog') >= 0 ){
             console.log("in anlog loop");
-            var num_samples = parseInt(message);
+            //var num_samples = parseInt(message);
             var sample_interval = 0;
+            var num_samples = 2;
             var interval = setInterval(b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
                     console.log('loopx.err = ' + x.err);
