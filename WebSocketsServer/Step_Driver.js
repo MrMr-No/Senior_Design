@@ -6,17 +6,20 @@
 var b = require('bonescript');
 
 var STEP_Pin     = 'P8_11';      //Step
-var DIR_Pin    = 'P9_17';      //Direction
+var DIR_Pin    = 'P8_10';      //Direction
 var SPR = 200; //For NEMA 23 motor
 var RPM = 30;
 var delayFactor = 1;
 b.pinMode(STEP_Pin, b.OUTPUT);
 b.pinMode(DIR_Pin, b.OUTPUT);
 
-// b.digitalWrite(STEP_Pin, b.LOW);
+// b.digitalWrite(STEP_Pin,b.LOW);
+// sleep(500);
+
+// b.digitalWrite(DIR_Pin, b.LOW);
 // sleep(10000);
 // console.log("Settinghigh");
-// b.digitalWrite(STEP_Pin, b.HIGH);
+// b.digitalWrite(DIR_Pin, b.HIGH);
 // sleep(10000);
 
 
@@ -61,7 +64,7 @@ Step_Driver.prototype.step = function(numberofsteps) {
     //b.pinMode(this.step_pin,b.OUTPUT);
     //b.pinMode(this.direction_pin, b.OUTPUT);
     try{
-        b.getPinMode(String(this.step_pin), printPinMux);
+         b.getPinMode(String(this.step_pin), printPinMux);
     }
     catch(err){
         console.log("error occurerd here");
@@ -90,7 +93,7 @@ Step_Driver.prototype.step = function(numberofsteps) {
         //TemporarySolution for timeoout problem
         // b.digitalWrite(this.step_pin, b.LOW);
         // b.digitalWrite(this.step_pin, b.HIGH);
-        for(var i = 1; i < numberofsteps; i++){
+        for(var i = 0; i < numberofsteps; i++){
            //  setTimeout(function(){
            //  console.log("Stepping");
            // // b.pinMode(this.step_pin,b.OUTPUT);
@@ -98,8 +101,9 @@ Step_Driver.prototype.step = function(numberofsteps) {
            //  b.digitalWrite(this.step_pin, b.HIGH);
            //  },delay); 
             b.digitalWrite(this.step_pin, b.LOW);
+            // sleep(10); //Get rid of this in both cases after 
             b.digitalWrite(this.step_pin, b.HIGH);
-            console.log("Stepping");
+            console.log("Stepping: "+ i);
             sleep(delay)
 
         };
@@ -120,7 +124,7 @@ Step_Driver.prototype.step = function(numberofsteps) {
         // b.digitalWrite(this.step_pin, b.LOW);
         // b.digitalWrite(this.step_pin, b.HIGH);
         console.log("Reverse Direction stepping222: ")
-        for(var i = numberofsteps+1; i <= -1; i++){
+        for(var i = numberofsteps; i <= -1; i++){
            //  setTimeout(function(){
            //  console.log("Stepping");
            // // b.pinMode(this.step_pin,b.OUTPUT);
@@ -128,14 +132,16 @@ Step_Driver.prototype.step = function(numberofsteps) {
            //  b.digitalWrite(this.step_pin, b.HIGH);
            //  },delay); 
             b.digitalWrite(this.step_pin, b.LOW);
+            sleep(10); // Get rid of this 
             b.digitalWrite(this.step_pin, b.HIGH);
-            console.log("Stepping");
+            console.log("Stepping: "+ i);
             sleep(delay)
 
         };
 
     };
     console.log("Finished stepping "+ numberofsteps +" steps");
+
 };
 
 Step_Driver.prototype.rotate = function(degrees){
@@ -147,7 +153,9 @@ Step_Driver.prototype.rotate = function(degrees){
 // 
 var stepper = new Step_Driver();
 console.log("stepper.step_pin " +stepper.step_pin);
-setTimeout(stepper.step(-200), 1500);
+setTimeout(stepper.step(-500), 100);
+
+
 
 
 
