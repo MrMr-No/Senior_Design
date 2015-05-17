@@ -1,6 +1,13 @@
 var WebSocketServer = require('ws').Server;
 // var analogRead = require('./analogRead');
 var b = require('bonescript');
+// var stepper_motor = require('./Step_Driver.js');
+var actuator = require('./Actuator.js');
+
+// var Stepper_A = new stepper_motor();
+// var A_linearPosition = 0;
+
+
 
 // Instantiate WebSocket server.
 var wss = new WebSocketServer({
@@ -33,6 +40,8 @@ wss.on('connection', function(ws) {
             //pwm.turnOn();
             ws.send('Connection Made');
             console.log("Connection worked");
+            // console.log("Stepping 200 Steps");
+            // Stepper_A.step(200);
             console.log("trying anlog");
             // analogRead.AnalogValue();
             // b.analogRead('P9_40',printAIN1(ws))
@@ -45,20 +54,21 @@ wss.on('connection', function(ws) {
             });
         }
         else if (message.indexOf('ReadAnalog') >= 0 ){
+
             console.log("in anlog loop");
-            //var num_samples = parseInt(message);
-            var sample_interval = 0;
-            var num_samples = 2;
-            var interval = setInterval(b.analogRead('P9_40',function(x){
+            var messageType = typeof message
+            console.log("Message: ", message);
+            console.log("Message Type: ", messageType);
+            //var num_samples = parseInt(message); 
+            var x_cordinate = parseInt((message),10);
+            console.log("Read X cordinate: ", x_cordinate);
+            process.exit(1);
+            b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
-                    console.log('loopx.err = ' + x.err);
-                    ws.send("Analog Voltage loop: "+String(1.8 * x.value));
+                    console.log('loop.err = ' + x.err);
+                    ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
                     
-                    samples_interval += 1;
-                    if (samples_interval === num_samples){
-                    clearInterval(interval);
-                    }
-                }, 1000));
+                });
             
         }
             // while(analogVal == undefined){
@@ -70,6 +80,7 @@ wss.on('connection', function(ws) {
             // setInterval(ws.send("AnalogValue: " + String(analogRead.AnalogValue())), 500);
         // set the duty cycle.
         else {
+            ws.send("Foxtrot Charlie Kilo over 'n out");
            // pwm.setDuty(message);
         }
     });
