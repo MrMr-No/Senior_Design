@@ -37,6 +37,12 @@ Actuator.prototype.MoveTo = function(x_cord){ //Argument is absolute cordinate b
 	this.position = Math.abs(actual_position);
 }
 
+
+//Export Constructor module
+
+module.exports = Actuator;
+
+
 // Test
 
 // var actuator = new Actuator();

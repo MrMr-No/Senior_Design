@@ -4,7 +4,7 @@ var b = require('bonescript');
 // var stepper_motor = require('./Step_Driver.js');
 var actuator = require('./Actuator.js');
 
-// var Stepper_A = new stepper_motor();
+ var Actuator_A = new actuator();
 // var A_linearPosition = 0;
 
 
@@ -60,9 +60,13 @@ wss.on('connection', function(ws) {
             console.log("Message: ", message);
             console.log("Message Type: ", messageType);
             //var num_samples = parseInt(message); 
-            var x_cordinate = parseInt((message),10);
+            //var x_cordinate = parseInt((message),10);
+            //Xcord doesnt work we need to fix this but not now!!!!!!!!!
+            var x_cordinate = 10
             console.log("Read X cordinate: ", x_cordinate);
-            process.exit(1);
+
+            Actuator_A.MoveTo(x_cordinate);
+
             b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
                     console.log('loop.err = ' + x.err);
