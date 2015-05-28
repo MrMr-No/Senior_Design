@@ -10,8 +10,7 @@ var DIR_Pin    = 'P8_10';      //Direction
 var SPR = 200; //For NEMA 23 motor
 var RPM = 75; // Do not use above 75!!!!!!!! (Recommended!!!!!!!) 
 var delayFactor = 1;
-b.pinMode(STEP_Pin, b.OUTPUT);
-b.pinMode(DIR_Pin, b.OUTPUT);
+
 
 // b.digitalWrite(STEP_Pin,b.LOW);
 // sleep(500);
@@ -34,11 +33,20 @@ function sleep(clock) { //in milliseconds
 
 function Step_Driver(step_pin, direction_pin, 
                      stepsPerRevolution, speedRPM) {
-    this.step_pin = typeof step_pin !== 'undefined' ? this.step_pin : STEP_Pin;
-    this.direction_pin = typeof direction_pin !== 'undefined' ? this.direction_pin : DIR_Pin;
-    this.SPR = typeof stepsPerRevolution !== 'undefined' ? this.SPR : SPR; //SPR = Steps per revolution
+    // this.step_pin = typeof step_pin !== 'undefined' ? this.step_pin : STEP_Pin;
+    // this.direction_pin = typeof direction_pin !== 'undefined' ? this.direction_pin : DIR_Pin;
+    // this.SPR = typeof stepsPerRevolution !== 'undefined' ? this.SPR : SPR; //SPR = Steps per revolution
     
-    this.RPM = typeof speedRPM !== 'undefined' ? this.RPM : RPM; // set RPM
+    // this.RPM = typeof speedRPM !== 'undefined' ? this.RPM : RPM; // set RPM
+
+    this.step_pin = step_pin || STEP_Pin;
+    this.direction_pin = direction_pin || DIR_Pin;
+    this.SPR = stepsPerRevolution || SPR; //SPR = Steps per revolution
+    this.RPM = speedRPM || RPM; // set RPM
+
+    b.pinMode(this.step_pin, b.OUTPUT);
+    b.pinMode(this.direction_pin, b.OUTPUT);
+
     this.delay = function(){ //in microseconds should be identical to set speed prototype
         delayPerSec = (60/this.RPM)/this.SPR;
         return (delayPerSec * 1000 * 1000); 

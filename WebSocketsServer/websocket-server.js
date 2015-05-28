@@ -4,7 +4,11 @@ var b = require('bonescript');
 // var stepper_motor = require('./Step_Driver.js');
 var actuator = require('./Actuator.js');
 
- var Actuator_A = new actuator();
+var Actuator_X = new actuator();
+var Actuator_Y = new actuator(128, 'P8_15', 'P8_13');
+
+console.log('Actuator_X: ', Actuator_X.step_pin);
+console.log("Actuator_Y: ", Actuator_Y.step_pin);
 // var A_linearPosition = 0;
 
 
@@ -60,12 +64,21 @@ wss.on('connection', function(ws) {
             console.log("Message: ", message);
             console.log("Message Type: ", messageType);
             //var num_samples = parseInt(message); 
-            //var x_cordinate = parseInt((message),10);
-            //Xcord doesnt work we need to fix this but not now!!!!!!!!!
-            var x_cordinate = 10
-            console.log("Read X cordinate: ", x_cordinate);
+            console.log("message: "+ message);
+            // var message2 = message.text;
+            var x_coordinate= parseFloat(message.split('(')[1].split(',')[0]);
+            var y_coordinate= parseFloat(message.split('(')[1].split(',')[1].split(')')[0]);
 
-            Actuator_A.MoveTo(x_cordinate);
+            // var sampleFloat = parseInt("10");
+            //Xcord doesnt work we need to fix this but not now!!!!!!!!!
+              // var x_coordinate = -10;
+            // console.log("SampleFloat:", sampleFloat);
+            console.log("Read X coordinate: ", x_coordinate);
+            console.log("Read Y coordinate: ", y_coordinate);
+
+            
+            Actuator_X.MoveTo(x_coordinate);
+            Actuator_Y.MoveTo(y_coordinate);
 
             b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
@@ -73,6 +86,10 @@ wss.on('connection', function(ws) {
                     ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
                     
                 });
+            console.log("Actuator position: ",Actuator_Y.position);
+            console.log("Actuator_X step pin: ", Actuator_X.step_pin);
+            console.log("Actuator_Y step pin:", Actuator_Y.step_pin);
+
             
         }
             // while(analogVal == undefined){
@@ -84,7 +101,7 @@ wss.on('connection', function(ws) {
             // setInterval(ws.send("AnalogValue: " + String(analogRead.AnalogValue())), 500);
         // set the duty cycle.
         else {
-            ws.send("Foxtrot Charlie Kilo over 'n out");
+            ws.send("Message Received but No Action Taken");
            // pwm.setDuty(message);
         }
     });

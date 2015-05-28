@@ -67,7 +67,8 @@ class PyClient(WebSocketClient):
         return self.last_received_message
 
 
-#Function to Create Beaglebone client            
+#Function to Create Beaglebone client  
+#Aways Change to correct IP address!!!!          
 def CreateClient(host = '192.168.1.24' , port = '8000'):
     try:
         print "Before WebSockets Connection"
