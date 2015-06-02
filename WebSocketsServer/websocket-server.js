@@ -1,6 +1,8 @@
 var WebSocketServer = require('ws').Server;
 // var analogRead = require('./analogRead');
 var b = require('bonescript');
+var async = require("async");
+
 // var stepper_motor = require('./Step_Driver.js');
 var actuator = require('./Actuator.js');
 
@@ -76,9 +78,16 @@ wss.on('connection', function(ws) {
             console.log("Read X coordinate: ", x_coordinate);
             console.log("Read Y coordinate: ", y_coordinate);
 
-            
-            Actuator_X.MoveTo(x_coordinate);
-            Actuator_Y.MoveTo(y_coordinate);
+            async.parallel([
+                Actuator_X.MoveTo(x_coordinate),
+                Actuator_Y.MoveTo(y_coordinate)
+
+                ],function(){
+                    console.log("Finished Running Both Motors");
+                });
+
+            // Actuator_X.MoveTo(x_coordinate);
+            // Actuator_Y.MoveTo(y_coordinate);
 
             b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
