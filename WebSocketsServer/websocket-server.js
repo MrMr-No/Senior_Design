@@ -94,6 +94,7 @@ wss.on('connection', function(ws) {
                     console.log('loop.err = ' + x.err);
                     ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
                     
+                    
                 });
             console.log("Actuator position: ",Actuator_Y.position);
             console.log("Actuator_X step pin: ", Actuator_X.step_pin);
