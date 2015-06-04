@@ -69,7 +69,7 @@ class PyClient(WebSocketClient):
 
 #Function to Create Beaglebone client  
 #Aways Change to correct IP address!!!!          
-def CreateClient(host = '192.168.7.2' , port = '8000'):
+def CreateClient(host = '192.168.1.7' , port = '8000'):
     try:
         print "Before WebSockets Connection"
         ws = PyClient('ws://' + host + ':' + port)

@@ -8,7 +8,7 @@ var b = require('bonescript');
 var STEP_Pin     = 'P8_11';      //Step
 var DIR_Pin    = 'P8_10';      //Direction
 var SPR = 200; //For NEMA 23 motor
-var RPM = 75; // Do not use above 75!!!!!!!! (Recommended!!!!!!!) 
+var RPM = 150; // Do not use above 75!!!!!!!! (Recommended!!!!!!!) 
 var delayFactor = 1;
 
 
@@ -67,8 +67,8 @@ Step_Driver.prototype.step = function(numberofsteps) {
     var delay  = (60/this.RPM)*1000/this.SPR;
     var clock = Date.now();
   
-    console.log("Step_pin:... "+ this.step_pin);
-    console.log("Direction Pin:... "+ this.direction_pin);
+    // console.log("Step_pin:... "+ this.step_pin);
+    // console.log("Direction Pin:... "+ this.direction_pin);
     console.log("Number of Steps: "+ numberofsteps)
     
     // try{
@@ -89,7 +89,7 @@ Step_Driver.prototype.step = function(numberofsteps) {
     // console.log('err = ' + x.err);
     // };
 
-    console.log("Stepping "+ numberofsteps+ ' steps');
+    // console.log("Stepping "+ numberofsteps+ ' steps');
     // delay =  this.delay / delayFactor;
     if (numberofsteps >= 0){
         if (this.clockwise) {
@@ -123,11 +123,11 @@ Step_Driver.prototype.step = function(numberofsteps) {
         };
         console.log("Reverse Direction stepping: ")
         
-        console.log("thisSPR:"+ this.SPR);
-        console.log("thisRPM"+ this.RPM);
-        console.log("Delay: "+ delay);
+        // console.log("thisSPR:"+ this.SPR);
+        // console.log("thisRPM"+ this.RPM);
+        // console.log("Delay: "+ delay);
 
-        console.log("Reverse Direction stepping222: ")
+        // console.log("Reverse Direction stepping222: ")
         for(var i = numberofsteps; i <= -1; i++){
 
             b.digitalWrite(this.step_pin, b.LOW);

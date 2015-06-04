@@ -7,18 +7,29 @@ var async = require("async");
 var actuator = require('./Actuator.js');
 
 var Actuator_X = new actuator();
-var Actuator_Y = new actuator(128, 'P8_15', 'P8_13');
+var Actuator_Y = new actuator(25, 'P8_15', 'P8_13', 'P8_18');
 
 console.log('Actuator_X: ', Actuator_X.step_pin);
 console.log("Actuator_Y: ", Actuator_Y.step_pin);
 // var A_linearPosition = 0;
 
 
-
 // Instantiate WebSocket server.
 var wss = new WebSocketServer({
     port: 8000
 });
+
+//Sleep function for AnalogRead delay
+
+function sleep(clock) { //in milliseconds
+  // var start = Date.now();
+  for (var i = 0; i < 1e7; i++) {
+    if ((Date.now()) >= clock){
+      break;
+    }
+  }
+}
+
 
 // Instantiate bbbPWM object to control PWM device.  Pass in device path
 // and the period to the constructor.
@@ -58,6 +69,11 @@ wss.on('connection', function(ws) {
 
                 console.log('Hi');
             });
+            
+            Actuator_X.MoveToZero();
+            Actuator_Y.MoveToZero();
+
+
         }
         else if (message.indexOf('ReadAnalog') >= 0 ){
 
@@ -89,11 +105,13 @@ wss.on('connection', function(ws) {
             // Actuator_X.MoveTo(x_coordinate);
             // Actuator_Y.MoveTo(y_coordinate);
 
+            sleep(100);
+
             b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
                     console.log('loop.err = ' + x.err);
-                    ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
-                    
+                    // ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
+                    ws.send(String(1.8 * x.value));
                     
                 });
             console.log("Actuator position: ",Actuator_Y.position);
