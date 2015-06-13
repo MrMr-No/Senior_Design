@@ -113,7 +113,7 @@ Actuator.prototype.MoveToZero = function(){// Moves actuator to zero position se
 
 	console.log('b.digitalread Preloop: ', b.digitalRead(this.Zero_pin));
 
-	if(b.digitalRead(this.Zero_pin) != 1){
+	if(b.digitalRead(this.Zero_pin) != initial_pin_status){
 
 	while(!bool_Zero_pin){
 
