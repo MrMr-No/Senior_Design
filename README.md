@@ -7,9 +7,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-Senior_Design: 2-Axis Pitot Tube Scanner
+Senior_Design: 2-Axis Pitot Tube Scanner 
 ================================
-Abstract
+Introduction: What is a 2-Axis Pitot Tube Scanner?
 ------------------------------
 Correctly measuring drag is crucial for the study of airflow over an aerodynamically intensive body. The 2-Axis Pitot Scanning system will use a pitot tube to scan the velocity profile in the wake of aerodynamic bodies and calculate the momentum deficit for drag analysis.
 
