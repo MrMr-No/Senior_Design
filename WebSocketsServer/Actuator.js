@@ -63,6 +63,28 @@ Actuator.prototype.MoveTo = function(cord){ //Argument is absolute cordinate bas
 	this.position = this.position + actual_distance;
 }
 
+Actuator.prototype.MoveDistance = function(distance){
+
+	//distance in millimeters
+	console.log("distance to travel: ", distance);
+	console.log("Current position: ", this.position);
+
+
+	steps = this.SPM * distance;
+
+	//round steps to nearest integer value
+	steps = Math.round(steps);
+	//actual postion with adjusted step rounding
+	actual_distance = steps / this.SPM;
+
+	//move motor
+	this._motorDriver.step(steps);
+	//update position
+	this.position = this.position + actual_distance;
+
+}
+
+
 // Moves actuator to zero position set by limit switch
 //Actuator backs off a bit when it hits zero
 
@@ -95,7 +117,7 @@ Actuator.prototype.MoveToZero = function(){// Moves actuator to zero position se
 
 	while(!bool_Zero_pin){
 
-		this._motorDriver.step(-10);
+		this._motorDriver.step(-5);
 		console.log('b.digitalread Postloop: ', b.digitalRead(this.Zero_pin));
 
 		// current_pin_status = b.digitalRead(this.Zero_pin);

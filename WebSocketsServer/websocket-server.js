@@ -78,12 +78,10 @@ wss.on('connection', function(ws) {
         else if (message.indexOf('ReadAnalog') >= 0 ){
 
             console.log("in anlog loop");
-            var messageType = typeof message
+            var messageType = typeof message;
             console.log("Message: ", message);
             console.log("Message Type: ", messageType);
-            //var num_samples = parseInt(message); 
-            console.log("message: "+ message);
-            // var message2 = message.text;
+            
             var x_coordinate= parseFloat(message.split('(')[1].split(',')[0]);
             var y_coordinate= parseFloat(message.split('(')[1].split(',')[1].split(')')[0]);
 
@@ -120,14 +118,55 @@ wss.on('connection', function(ws) {
 
             
         }
-            // while(analogVal == undefined){
-// 
-// 
-            // }
-            // console.log("analogVal: "+analogVal);
-            
-            // setInterval(ws.send("AnalogValue: " + String(analogRead.AnalogValue())), 500);
-        // set the duty cycle.
+
+        else if (message.indexOf('Move_X') >= 0 ){
+            console.log("in X loop");
+
+            var messageType = typeof message;
+            console.log("Message: ", message);
+            console.log("Message Type: ", messageType);
+
+            x_distance = parseFloat(message.split('(')[1].split(')')[0]);
+
+            console.log("X distance: ", x_distance);
+
+            Actuator_X.MoveDistance(x_distance);
+
+            console.log("finished moving X distance, ", x_distance);
+
+
+        }
+
+        else if (message.indexOf('Move_Y') >= 0 ){
+            console.log("in Y loop");
+
+            var messageType = typeof message;
+            console.log("Message: ", message);
+            console.log("Message Type: ", messageType);
+
+            y_distance = parseFloat(message.split('(')[1].split(')')[0]);
+
+            console.log("Y distance: ", y_distance);
+
+            Actuator_Y.MoveDistance(y_distance);
+            console.log("finished moving Y distance, ", y_distance);
+
+        }
+
+        else if (message.indexOf('ReturnAnalog') >= 0 ){
+
+            console.log("Reading and sending Analog")
+
+            b.analogRead('P9_40',function(x){
+                    console.log('loopx.value = ' + x.value* 1.8);
+                    console.log('loop.err = ' + x.err);
+                    // ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
+                    ws.send(String(1.8 * x.value));
+            });
+        }
+
+
+
         else {
             ws.send("Message Received but No Action Taken");
            // pwm.setDuty(message);
