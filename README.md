@@ -22,7 +22,20 @@ The 2-Axis Pitot Scanning system uses a pitot tube to scan the velocity profile 
 #####Front
 ![alt text](https://github.com/alexlerikos/Senior_Design/blob/master/README_images/Front.png)
 
-Our scanning system consists of a pitot tube mounted on the end of of a 2-axis carriage which is driven by stepper motors. This will measure pressure across a plane downstream of an aerodynamic body of interest. A microcontroller will handle user specifications, motion control, and computations on the collected pressure sensor data. Users will interact with the system through an IPython Notebook environment. The final system is designed to fit with the dimensions of the client’s wind tunnel and be accurate for airspeeds ranging from 1-30 miles per hour. The 2-Axis Pitot Scanning system will greatly assist professors and students with aerodynamic research and education by demonstrating bernoulli's law and finding drag of bodies for reference.
+As shown above, our scanning system consists of a pitot tube mounted on the end of of a 2-axis carriage which is driven by stepper motors. 
 
-Mechanical System
---------------------------------
+Our system is controlled through a Beaglebone Black on-board computer. The on-board computer uses Node.js to broadcast a local WebSockets server, control the positioning of the multi-axis actuators and process the analog voltage signals from pressure sensor attached to the pitot tube. An IPython notebook is used to supply positioning data to the Beaglebone, process analog voltage data and view the results. The IPython notebook makes a client Websockets connection to the Beaglebone on-board computer server. This allows for real-time transmission of data between the IPython notebook and the server running on the Beaglebone. 
+	
+
+Contents of this Repository
+--------------------------------------
+
+This reposititory contains the Python and Node.js modules used to facilitate our project (Solidworks files may be added in time). 
+
+###WebSocketsServer
+
+
+
+###IPython_Interface
+	
+	
