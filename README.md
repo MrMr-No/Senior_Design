@@ -36,4 +36,9 @@ This file contains the [ws](https://einaros.github.io/ws/) Websockets implimetat
 
 ###IPython_Interface
 This foler contains the IPython client scripts and modules that operate and process the analog voltage data returned from the Beaglebone. IPython chosen as our client due to customer specifications
-	
+
+##Flowchart/State Diagram of Software Execution
+The follwing is a flowchart/state diagram of the software execution and shows how the IPython Client requests interact with the Node.JS websockets server running on the Beaglebone.
+
+![alt text](https://github.com/alexlerikos/Senior_Design/blob/master/README_images/Software%20Flowchart.png)
+
