@@ -35,5 +35,5 @@ This file contains the [ws](https://einaros.github.io/ws/) Websockets implimetat
 
 
 ###IPython_Interface
-	
+This foler contains the IPython client scripts and modules that operate and process the analog voltage data returned from the Beaglebone. IPython chosen as our client due to customer specifications
 	
