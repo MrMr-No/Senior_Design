@@ -1,6 +1,7 @@
 /*Actuator.js 
 * Class to handle position and movement translation from motor rotation
 * to linear movement
+* Node module to give convience method wrappers to Step_Driver.js
 */
 var Driver = require("./Step_Driver.js");
 var b = require('bonescript');
@@ -24,8 +25,6 @@ function Actuator(StepsPerMillimeter, driver_step_pin, driver_direction_pin, mot
 
 	this.SPM =  StepsPerMillimeter || SPM;
 	this.position = 0; //May add Default if needed 
-	// this.step_pin = typeof driver_step_pin !== 'undefined' ? this.step_pin : default_step_pin;
-	// this.direction_pin = typeof driver_direction_pin !== 'undefined' ? this.direction_pin : default_direction_pin;
 	
 	this.step_pin = driver_step_pin || default_step_pin;
 	this.direction_pin = driver_direction_pin || default_direction_pin;
@@ -35,12 +34,6 @@ function Actuator(StepsPerMillimeter, driver_step_pin, driver_direction_pin, mot
 	console.log("Motor driver direction_pin ", this._motorDriver.direction_pin);
 	
 }
-// console.log("Actuator Step pin: ", Actuator.step_pin);
-// console.log("Actuator Direction Pin: ", Actuator.direction_pin);
-
-// motorDriver = new Driver(Actuator.step_pin, Actuator.direction_pin);
-// console.log("motordriver Step pin: ", motorDriver.step_pin);
-// console.log("motrdriver Direction Pin: ", motorDriver.direction_pin);
 
 Actuator.prototype.MoveTo = function(cord){ //Argument is absolute cordinate based off position
 	//x_cord in millimeters
@@ -86,7 +79,7 @@ Actuator.prototype.MoveDistance = function(distance){
 
 
 // Moves actuator to zero position set by limit switch
-//Actuator backs off a bit when it hits zero
+// Actuator backs off a bit when it hits zero
 
 Actuator.prototype.MoveToZero = function(){// Moves actuator to zero position set by limit switch
 	console.log("Trying Zero Function, this.zeropin: ", this.Zero_pin);
