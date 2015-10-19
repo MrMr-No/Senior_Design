@@ -24,6 +24,13 @@ Contents of this Repository
 This reposititory contains the Python and Node.js modules used to facilitate our project (Solidworks files may be added in time). 
 
 ###WebSocketsServer
+This folder contains all the Javascript and Node.js modules that run on the Beaglebone Black on-board computer. Pin I/O to the Beaglebone black was handled through the [Bonescript](http://beagleboard.org/Support/BoneScript) library provided by Beagelboard.org.
+
+#####websockets-server.js:
+This file contains the [ws](https://einaros.github.io/ws/) Websockets implimetation that sets up a Websockets server to recieve and send data from the Beaglebone Black. It is currently set to handle the following messages:
+
+..*"connection" : This will return verification to the client if the connection to the Beagelbone was successful
+
 
 
 
