@@ -68,6 +68,7 @@ wss.on('connection', function(ws) {
 
 
         }
+        // Read Analog input 
         else if (message.indexOf('ReadAnalog') >= 0 ){
 
             console.log("in anlog loop");
@@ -147,7 +148,6 @@ wss.on('connection', function(ws) {
             b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
                     console.log('loop.err = ' + x.err);
-                    // ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
                     ws.send(String(1.8 * x.value));
             });
         }

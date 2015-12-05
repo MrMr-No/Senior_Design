@@ -89,20 +89,11 @@ Actuator.prototype.MoveToZero = function(){// Moves actuator to zero position se
 	var bool_Zero_pin = false;
 	var initial_pin_status;
 	var current_pin_status;
-	
-	// b.digitalRead(this.Zero_pin, Pinstatus);
 
 	initial_pin_status = b.digitalRead(this.Zero_pin);
 	console.log("intial pin status: ", initial_pin_status);
 	current_pin_status = initial_pin_status;
 	
-
-	// function Pinstatus(x) {
- //    	console.log('x.value = ' + x.value);
- //    	console.log('x.err = ' + x.err);
- //    	initial_pin_status = x.value;
- //    	current_pin_status = initial_pin_status;
-	// }
 
 	console.log('b.digitalread Preloop: ', b.digitalRead(this.Zero_pin));
 
