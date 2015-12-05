@@ -27,12 +27,18 @@ This reposititory contains the Python and Node.js modules used to facilitate our
 This folder contains all the Javascript and Node.js modules that run on the Beaglebone Black on-board computer. Pin I/O to the Beaglebone black was handled through the [Bonescript](http://beagleboard.org/Support/BoneScript) library provided by Beagelboard.org.
 
 #####websockets-server.js:
-This file contains the [ws](https://einaros.github.io/ws/) Websockets implimetation that sets up a Websockets server to recieve and send data from the Beaglebone Black. It is currently set to handle the following messages:
+This file contains the [ws](https://einaros.github.io/ws/) Websockets implimetation that sets up a Websockets server to recieve and send data from the Beaglebone Black. 
 
-..*"connection" : This will return verification to the client if the connection to the Beagelbone was successful
+To run the websockets server, use the command: `node websockets-server.js` while in the *WebsocketServer* directory
 
+It is currently set to handle the following messages:
 
-
+* `"connection"` : This will return verification to the client if the connection to the Beagelbone was successful and set up the websockets connection between the IPython Client and the Websockets server
+* `"message"` : Any message other than `connection` will be handled in this callback section
+* `"ReadAnalog:(x,y)"`: This message triggers the callback that moves the stepper motors such that the Pitot static tube is in the (X,Y) position in the  tunnel's cross-section. It then reads the current analog voltage input from the designated Beaglebone analog I/O pin and returns the analog voltage value to the IPython client
+* `"Move_X"` and `"Move_Y"`: These messages trigger callbacks that move ths Pitot Static tube to the respective X or Y position in the in the  tunnel's cross-section. They **do not** return messages to the IPython Client.
+* `"ReturnAnalog"`: This message triggers a callback that returns the current analog voltage input from the designated Beaglebone analog I/O pin. It **does not** send return messages to the IPython Client.
+* If an invalid message is sent to the websockets server, the default response message is `"Message Received but No Action Taken"`. This confirms that the message was recieved but it was invalid.
 
 ###IPython_Interface
 This foler contains the IPython client scripts and modules that operate and process the analog voltage data returned from the Beaglebone. IPython chosen as our client due to customer specifications
