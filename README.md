@@ -40,6 +40,18 @@ It is currently set to handle the following messages:
 * `"ReturnAnalog"`: This message triggers a callback that returns the current analog voltage input from the designated Beaglebone analog I/O pin. It **does not** send return messages to the IPython Client.
 * If an invalid message is sent to the websockets server, the default response message is `"Message Received but No Action Taken"`. This confirms that the message was recieved but it was invalid.
 
+#####Actuator.js:
+This file is the linear actuator module. Each actuator is defined in the `websockets-server.js` file is an object of this class module. This module has 4 public protocols:
+
+* `Actuator(StepsPerMillimeter, driver_step_pin, driver_direction_pin, motor_Zero_pin)`: This is the class constructor, it takes takes 4 arguments:
+	* *StepsPerMillimeter*: the number of motor steps it takes to travel 1 millmeter horizontally or vertically along the linear actualtor.
+	* *driver_step_pin*: The macro for the Beaglebone pin that sends digital output signals to the motor driver to step the motors.
+	* *driver_direction_pin*: The macro for the Beaglebone pin that sends digital output signals to the motor drivers to indicate the motor direction.
+	* *motor_Zero_pin*: This is the macro for the Beaglebone pin that is used as a ground refrence for the motor driver
+* `MoveTo(cord)`: This protocol moves the actuator to position *cord* reletive to a predefined zero
+* `MoveDistance(distance)`: This protocol moves the actuator to the postion that is a distance away from the current position
+* `MoveToZero()`: This protocol moves the actuators to the zero position. The actuators move the Pitot Tube carrage toward the motors, then stop rotoating after limit switches are triggered. The final position is used as the zero refrence point.
+
 ###IPython_Interface
 This foler contains the IPython client scripts and modules that operate and process the analog voltage data returned from the Beaglebone. IPython chosen as our client due to customer specifications
 
