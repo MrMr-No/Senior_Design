@@ -68,7 +68,18 @@ It containts a set 4 public methods and 1 private method that rotate the drive t
 Because Javascript is asynchrounus, the sleep function cannot work by just being called as the process thread will continue past it. Instead, it captures the process thread in a loop that checks if the delay time has passed at each iteration. The timing engine is based off `Date` module set up by the operating system at startup. Once the delay time has passed, the process thread is released from the loop and continues to the next motor step.
 
 ###IPython_Interface
-This foler contains the IPython client scripts and modules that operate and process the analog voltage data returned from the Beaglebone. IPython chosen as our client due to customer specifications
+This folder contains the IPython client scripts and modules that operate and process the analog voltage data returned from the Beaglebone. IPython chosen as our client platform due to customer request
+
+#####interface.ipynb:
+This is the primary IPython Client interface. It is currently set up to run a demo but can be modified as needed using the websocket API calls. Currently it runs in the following proccess:
+
+1. Data sampling points in the Tunnel's cross section are read from a CSV file and ported to a Pandas Dataframe object. This Dataframe will have columns showing the X and Y position of the pitot tube and the corrosponinding analog voltage read at that position.
+2. The `SocketsCreator.py` module is used to return a websockets object to the IPython notebook and sets up the websockets connnection between the IPython Client and the websockets server on the Beaglebone.
+3. A sample batch test is run using the coordinates in the Dataframe object from step 1. For each data point, the `ReadAnalog(x,y)` message is sent to the websockets server and the analog voltage at the *x,y* position is returned to the IPython client.
+4. The output of the batch test is saved in a Dataframe object that is then outputed as a CSV file.
+
+#####SocketsCreator.py:
+This file contains the PyClient class that inherits from the Websockets client class. It also contains a CreateClient function that returns a PyClient class object to the main IPython notebook.
 
 ##Flowchart/State Diagram of Software Execution
 The follwing is a flowchart/state diagram of the software execution and shows how the IPython Client requests interact with the Node.JS websockets server running on the Beaglebone.
