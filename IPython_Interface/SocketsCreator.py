@@ -33,7 +33,6 @@ class PyClient(WebSocketClient):
         
         if m == 'Connection Made':
             print "Connection Successful"
-        # else if m == "Analog Values: "
 
     def response(self, message): #returns string
         print "Sending message: "+ message
@@ -46,13 +45,8 @@ class PyClient(WebSocketClient):
         timer = send_time
 
         while self.waiting_for_response or timer <= 2:
-            # timer = time.clock() - send_time
-            # print timer'
             timer = time.time() - send_time
 
-        # if self.waiting_for_response == True:
-        #     return "Timeout"
-        # else:
 
         print "SocketsCreator Message: "+ self.last_received_message
         return self.last_received_message

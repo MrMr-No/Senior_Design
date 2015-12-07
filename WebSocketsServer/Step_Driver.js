@@ -12,7 +12,6 @@ var RPM = 150; // Do not use above 75!!!!!!!! (Recommended!!!!!!!)
 var delayFactor = 1;
 
 function sleep(clock) { //in milliseconds
-  // var start = Date.now();
   for (var i = 0; i < 1e7; i++) {
     if ((Date.now()) >= clock){
       break;

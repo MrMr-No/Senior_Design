@@ -6,7 +6,6 @@
 var Driver = require("./Step_Driver.js");
 var b = require('bonescript');
 
-// motorDriver = new Driver();
 
 
 var SPM = 25; //Default Steps per millimeter of linear travel

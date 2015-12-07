@@ -1,5 +1,4 @@
-// Main module to run stepper motor driver
-// 
+// Main module to run server
 var WebSocketServer = require('ws').Server;
 var b = require('bonescript');
 var async = require("async");
@@ -12,7 +11,6 @@ var Actuator_Y = new actuator(25, 'P8_15', 'P8_13', 'P8_18');
 
 console.log('Actuator_X: ', Actuator_X.step_pin);
 console.log("Actuator_Y: ", Actuator_Y.step_pin);
-// var A_linearPosition = 0;
 
 
 // Instantiate WebSocket server.
@@ -30,10 +28,6 @@ function sleep(clock) { //in milliseconds
     }
   }
 }
-
-
-// Instantiate bbbPWM object to control PWM device.  Pass in device path
-// and the period to the constructor.
 
 
 // Handle connections
@@ -96,7 +90,6 @@ wss.on('connection', function(ws) {
             b.analogRead('P9_40',function(x){
                     console.log('loopx.value = ' + x.value* 1.8);
                     console.log('loop.err = ' + x.err);
-                    // ws.send("ReadAnalog BB Voltage : "+String(1.8 * x.value));
                     ws.send(String(1.8 * x.value));
                     
                 });
