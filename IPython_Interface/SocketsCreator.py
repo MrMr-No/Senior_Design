@@ -49,7 +49,10 @@ class PyClient(WebSocketClient):
 
 
         print "SocketsCreator Message: "+ self.last_received_message
-        return self.last_received_message
+        if self.waiting_for_response:
+            return "No response"
+        else:
+            return self.last_received_message
 
 
 #Function to Create Beaglebone client  

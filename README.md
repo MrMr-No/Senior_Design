@@ -80,6 +80,10 @@ This is the primary IPython Client interface. It is currently set up to run a de
 
 #####SocketsCreator.py:
 This file contains the PyClient class that inherits from the Websockets client class. It also contains a CreateClient function that returns a PyClient class object to the main IPython notebook. The PyClient inherited methods are defined in the following:
+* `opened(self)`: This function was used to get a test response from the Websockets server running on the Beaglebone. It used the Websockets client method `send` to send a test message that caused the server to print to the consol its current analog voltage input values at its designignated analog read pins. 
+* `closed(self, code, reason=None)`: This method was called if for any reason the Websocket connection closed. It prints to the IPython client console that the connection has closed. 
+* `received_message(self, m)`: If the client recieves a message for any reason, this protocol is called. It stores the recieved message in the object variable `last_received_message`.
+* `response(self, message)`: This method sends a message to the websockets server and waits for a response. If a response is received before the timeout time has expired, it takes the message stored in the `last_received_message` object variable and returns the message. If the time expires and no message is recieved, it returns the string `"No Response"`.
 
 ##Flowchart/State Diagram of Software Execution
 The follwing is a flowchart/state diagram of the software execution and shows how the IPython Client requests interact with the Node.JS websockets server running on the Beaglebone.
