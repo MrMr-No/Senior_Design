@@ -79,7 +79,7 @@ This is the primary IPython Client interface. It is currently set up to run a de
 4. The output of the batch test is saved in a Dataframe object that is then outputed as a CSV file.
 
 #####SocketsCreator.py:
-This file contains the PyClient class that inherits from the Websockets client class. It also contains a CreateClient function that returns a PyClient class object to the main IPython notebook.
+This file contains the PyClient class that inherits from the Websockets client class. It also contains a CreateClient function that returns a PyClient class object to the main IPython notebook. The PyClient inherited methods are defined in the following:
 
 ##Flowchart/State Diagram of Software Execution
 The follwing is a flowchart/state diagram of the software execution and shows how the IPython Client requests interact with the Node.JS websockets server running on the Beaglebone.
