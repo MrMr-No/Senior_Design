@@ -2,7 +2,7 @@ Senior_Design: 2-Axis Pitot Tube Scanner
 ================================
 Introduction: What is a 2-Axis Pitot Tube Scanner?
 ------------------------------
-The 2-Axis Pitot Scanning system uses a pitot tube to scan the velocity profile in the wake of aerodynamic bodies and calculate the momentum deficit for drag analysis. A 2-axis carrage is driven by stepper motors into position and measures pressure downstream using a pressure differential analog sensor. To better visulize this system, check out the CAD models below (thanks Biran Orr!).
+The 2-Axis Pitot Scanning system uses a pitot tube to scan the velocity profile in the wake of aerodynamic bodies and calculate the momentum deficit for drag analysis. A 2-axis carrage is driven by stepper motors into position and measures pressure downstream using a pressure differential analog sensor. To better visulize this system, check out the CAD models below (thanks [Biran Orr!](https://www.linkedin.com/in/brian-orr-872b5857)).
 
 #####Orthogonal Front
 ![alt text](https://github.com/alexlerikos/Senior_Design/blob/master/README_images/Orthogonal_Front.png)
