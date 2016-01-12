@@ -18,6 +18,7 @@ var wss = new WebSocketServer({
     port: 8000
 });
 
+// console.log("Server ip: ", String(wss.host));
 //Sleep function for AnalogRead delay
 
 function sleep(clock) { //in milliseconds
@@ -35,6 +36,7 @@ wss.on('connection', function(ws) {
 
     // Send message to client that connection has been made.
     ws.send('Connection Successful');
+    console.log("Received connection");
 
     // Handle incoming messages.
     ws.on('message', function(message) {
